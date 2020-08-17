@@ -24,9 +24,18 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "flightlessmango";
     repo = "MangoHud";
-    rev = "acf2d88fbcb7a7a47f957a87d20739c67049bd0d";
-    sha256 = "0qmprnxrvh8bkn6dnrk22v53am3flpixh046w7ach3pnfck1hpfb";
+    rev = "v${version}";
+    sha256 = "04v2ps8n15ph2smjgnssax5hq88bszw2kbcff37cnd5c8yysvfi6";
+    fetchSubmodules = true;
   };
+
+  patches = [
+    (fetchpatch {
+      # FIXME obsolete in >=0.5.0
+      url = "https://patch-diff.githubusercontent.com/raw/flightlessmango/MangoHud/pull/208.patch";
+      sha256 = "1i6x6sr4az1zv0p6vpw99n947c7awgbbv087fghjlczhry676nmh";
+    })
+  ];
 
   mesonFlags = [
     "-Dappend_libdir_mangohud=false"
