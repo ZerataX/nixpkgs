@@ -5239,6 +5239,10 @@ in
 
   mandoc = callPackage ../tools/misc/mandoc { };
 
+  mangohud = callPackage ../tools/graphics/mangohud/combined.nix {
+    libXNVCtrl = linuxPackages.nvidia_x11.settings.libXNVCtrl;
+  };
+
   marktext = callPackage ../applications/misc/marktext { };
 
   mawk = callPackage ../tools/text/mawk { };
