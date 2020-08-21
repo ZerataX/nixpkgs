@@ -16,5 +16,15 @@ pkgs.buildEnv rec {
     [ mangohud_64 ]
   ;
 
+  postBuild = ''
+    pushd "$out/share/vulkan/implicit_layer.d/"
+    substitute ./MangoHud.json ./MangoHud.json.new \
+      --replace "${mangohud_32}" "$out"
+    mv MangoHud.json.new MangoHud.json
+    popd
+  '';
+
+  ignoreCollisions = true;
+
   meta = mangohud_64.meta;
 }
